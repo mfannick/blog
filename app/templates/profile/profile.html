@@ -1,0 +1,94 @@
+{% extends 'base.html'%}
+
+
+{% block content %}
+<div class="container">
+  <div class="row">
+
+    <!-- displaying  Username-->
+    <div class="col-md-5">
+      <div class="jumbotron" style="padding-top:120px">
+        <h3> Username:{{user.username| capitalize}} </h3>
+
+        <!--Displaying user bio-->
+        {% if user.bio %}
+        <p style="font-size: 15px">Bio: {{user.bio}}</p>
+        {%else%}
+        <p style="font-size: 15px"> Username:{{user.username| capitalize}} has no bio </p>
+        {% endif %}
+      </div>
+
+    </div>
+
+
+    <!--Display profile photo-->
+    <div class="col-md-5">
+
+      {% if user.profile_pic_path %}
+      <img src="{{url_for('static',filename=user.profile_pic_path)}}" alt="" class="img-thumbnail">
+      {%else%}
+      <p>No profile picture</p>
+      {% endif %}
+
+      {% if user == current_user %}
+      <a href="{{url_for('main.update_profile',uname=user.username)}}">Edit profile</a>
+      {% endif %}
+    </div>
+
+  </div>
+  <div class="row">
+    {% if user == current_user %}
+    <form action="{{url_for('main.update_pic',uname=user.username)}}" method="post" enctype="multipart/form-data">
+
+      <input type="file" name="photo" class="form-control" required><br><br>
+      <input type="submit" class="btn btn-info"
+      style="font-family:'El Messiri', sans-serif ">
+    </form>
+    {% endif %}
+  </div> <br><br>
+
+  {% for blog in blogWrite%}
+  <!-- <div class="table jumbotron ">
+    <p> Title:{{blog.blogTitle}}</p>
+    <p>Blog:{{blog.blogWrite}}</p>
+    <a href="/deleteblog/blog/{{blog.id}}" style="font-family:'El Messiri', sans-serif " class="btn btn-info">Delete Blog</a>
+    <a href="/blog/{{blog.id}}/update" style="font-family:'El Messiri', sans-serif " class="btn btn-info">Update Blog</a>
+  </div> -->
+
+  <div class="container py-3 table" >
+      <div class="card">
+          <div class="row ">
+              <div class="col-md-4">
+                  <img style="border-radius: 2000px" height="150px" width="200px"
+                      src="https://as2.ftcdn.net/jpg/02/07/53/83/500_F_207538366_r6yerLIhPIU5uRkk66T1QUzTcpI9rtzZ.jpg"
+                      class="w-100">
+              </div>
+              <div class="col-md-8 px-3">
+                  <div class="card-block px-3">
+                      <h4 class="card-title"
+                          style="font-family: 'El Messiri', sans-serif ; color: rgba(14, 174, 196, 1)">
+                          {{blog.blogTitle}}</h4>
+                      <p class="card-text"
+                          style="font-size: 15px ; font-family: 'El Messiri', sans-serif">
+                          {{blog.blogWrite}} </p>
+                      <p class="card-text"
+                          style="font-size: 15px ;font-family: 'El Messiri', sans-serif">
+                          Posted on:{{blog.posted.strftime('%Y-%m-%d')}}.</p>
+                      <a href="/deleteblog/blog/{{blog.id}}" class="btn btn-info"
+                          style="font-family:'El Messiri', sans-serif ">Delete Blog</a>
+                      <a href="/blog/{{blog.id}}/update" class="btn btn-info"
+                          style="font-family:'El Messiri', sans-serif ">Update blog</a>
+                        
+                  </div>
+              </div>
+
+          </div>
+      </div>
+  </div>
+
+
+  {%endfor%}
+
+
+</div>
+{% endblock %}

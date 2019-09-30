@@ -1,0 +1,3 @@
+Hello {{newSubscriber.subscriberName}}
+Thank you for subscribing
+Please enjoy Bloging.

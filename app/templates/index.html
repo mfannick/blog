@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% import 'macros.html' as macro %}
+{%block styles%}
+{{ super() }}
+<link href="https://fonts.googleapis.com/css?family=El+Messiri&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{url_for('static',filename='css/index.css')}}">
+{%endblock%}
+{%block content%}
+<img src="https://as2.ftcdn.net/jpg/01/93/22/45/500_F_193224512_jktLglscIiq6MtUSlT3a7xavUvEp5uAe.jpg" alt="blog" width="1450px" height="20%">
+<div class="container">
+    <p style="text-align: center"> <a style="color: rgba(14, 174, 196, 1); font-size:100px;font-family: 'El Messiri', sans-serif " href="{{url_for ('main.newBlog')}}">Post your blog</a></p>
+    <div class="blog">
+            <p>{{macro.displayBlogs(blogs)}}</p>
+            <p>{{macro.displayComments(comments)}}</p>
+
+    </div>
+    
+    
+</div>
+{%endblock%}
+
+<style>
+    @import url('https://fonts.googleapis.com/css?family=El+Messiri&display=swap');
+
+    #view {
+        font-family: 'El Messiri', sans-serif;
+    }
+</style>
