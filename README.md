@@ -7,7 +7,7 @@
 
    | Required                                  | Description                                                       | How to run                            |
 |-------------------------------------------|-------------------------------------------------------------------|---------------------------------------|
-| A user visit the website and sign up if she/he want to access those functionality except subscription where it is not required to sind up         | S/he can see others blogs                                   | The project is run using the browser |
+| A user visit the website and sign up if she/he want to access those functionality except subscription where it is not required to sign up         | S/he can see others blogs                                   | The project is run using the browser |
                  
 
    ### Technologies used
