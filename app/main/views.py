@@ -1,5 +1,6 @@
 from flask import render_template,request,redirect,url_for,abort
 from . import main
+from ..requests import get_quote
 from ..models import User,Blog,Comment,Subscribe
 from .. import db,photos
 from .forms import UpdateProfile,BlogForm,CommentForm,UpdateblogForm,SubscribeForm
@@ -13,9 +14,9 @@ def index():
     View root page function that returns the index page and its data
     '''
     blogs=Blog.query.all()
-    
+    quote=get_quote()
     title = 'Home - Welcome to Bloging website'
-    return render_template('index.html',title = title,blogs=blogs)
+    return render_template('index.html',title = title,blogs=blogs,quote=quote)
 @main.route('/user/<uname>')
 def profile(uname):
     user = User.query.filter_by(username = uname).first()
@@ -88,10 +89,11 @@ def commentBlog(id):
 
 @main.route('/viewcomment/blog/<int:id>', methods = ['GET','POST'])
 def seeCommentBlog(id):
+    quote=get_quote()
     user=User.query.filter_by(id=id).first()
     blog=Blog.query.filter_by(id=id).first()
     comments=Comment.query.filter_by(blogId=id)
-    return render_template('index.html',blog=blog,comments=comments,user=user)
+    return render_template('index.html',blog=blog,comments=comments,user=user,quote=quote)
 
 @main.route('/deleteblog/blog/<int:id>', methods = ['GET','POST'])
 @login_required

@@ -79,6 +79,17 @@ class Subscribe(db.Model):
     subscriberName=db.Column(db.String(255))
     subscriberEmail=db.Column(db.String(255),unique = True,index = True, nullable=False)
 
+class Quotes:
+    '''
+    Quote class to define Movie Objects
+    '''
+
+    def __init__(self,id,author,content):
+        self.id =id
+        self.author = author
+        self.content = content
+     
+
 
  
 
